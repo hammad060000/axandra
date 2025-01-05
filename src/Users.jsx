@@ -472,7 +472,7 @@ function Users() {
           {/* Contact Section Start */}
           <section
             id="contact"
-            className="inner contact"
+            className="inner contact "
             style={{ height: "100%" }}
           >
             {/* Content Block - H2 Section Title Start */}
@@ -594,7 +594,7 @@ function Users() {
                   </div>
                 </div>
               </div>
-              <div className="teaser">
+              <div className="content__block teaser">
                 <p className="teaser__text animate-in-up">
                   Want to know more about me, tell me about your project or just
                   to say hello?
@@ -607,40 +607,44 @@ function Users() {
                   and I'll get back as soon as possible.
                 </p>
               </div>
-              <div className="container-fluid p-0 contact-lines animate-in-up">
-                <div className="row g-0 contact-lines__item">
-                  {/* data item */}
-                  <div className="col-12 col-md-4 contact-lines__data">
-                    <p className="contact-lines__title animate-in-up">
-                      Location
-                    </p>
-                    <p className="contact-lines__text animate-in-up">
-                      <a className="text-link-bold">Australis, UAE (Dubai)</a>
-                    </p>
-                  </div>
-                  {/* data item */}
-                  <div
-                    className="col-12 col-md-4 contact-lines__data"
-                    id="contact"
-                  >
-                    <p className="contact-lines__title animate-in-up">
-                      Discord Instagram & Twitter <br /> usename
-                    </p>
-                    <p className="contact-lines__text animate-in-up">
-                      <a className="text-link-bold">axandra_deenn</a>
-                    </p>
-                  </div>
-                  {/* data item */}
-                  <div className="col-12 col-md-4 contact-lines__data">
-                    <p className="contact-lines__title animate-in-up">Email</p>
-                    <p className="contact-lines__text animate-in-up">
-                      <a
-                        className="text-link-bold"
-                        href="mailto:axandradeen@gmail.com"
-                      >
-                        axandradeen@gmail.com
-                      </a>
-                    </p>
+              <div className="content__block">
+                <div className="container p-0 contact-lines animate-in-up">
+                  <div className="row g-0 contact-lines__item">
+                    {/* data item */}
+                    <div className="col-12 col-md-4 contact-lines__data">
+                      <p className="contact-lines__title animate-in-up">
+                        Location
+                      </p>
+                      <p className="contact-lines__text animate-in-up">
+                        <a className="text-link-bold">Australis, UAE (Dubai)</a>
+                      </p>
+                    </div>
+                    {/* data item */}
+                    <div
+                      className="col-12 col-md-4 contact-lines__data"
+                      id="contact"
+                    >
+                      <p className="contact-lines__title animate-in-up">
+                        Discord Instagram & Twitter <br /> usename
+                      </p>
+                      <p className="contact-lines__text animate-in-up">
+                        <a className="text-link-bold">axandra_deenn</a>
+                      </p>
+                    </div>
+                    {/* data item */}
+                    <div className="col-12 col-md-4 contact-lines__data">
+                      <p className="contact-lines__title animate-in-up">
+                        Email
+                      </p>
+                      <p className="contact-lines__text animate-in-up">
+                        <a
+                          className="text-link-bold"
+                          href="mailto:axandradeen@gmail.com"
+                        >
+                          axandradeen@gmail.com
+                        </a>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
