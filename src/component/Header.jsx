@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Header = () => {
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  const toggleColorScheme = () => {
+    const htmlElement = document.documentElement; // Refers to <html>
+    if (isDarkMode) {
+      htmlElement.setAttribute("color-scheme", "light");
+    } else {
+      htmlElement.setAttribute("color-scheme", "dark");
+    }
+    setIsDarkMode(!isDarkMode); // Toggle state
+  };
   return (
     <>
       {/* Header Start */}
@@ -28,12 +39,6 @@ const Header = () => {
                 </a>
               </li>
               <li className="menu__item">
-                <a className="menu__link btn" href="#resume">
-                  <span className="menu__caption">Resume</span>
-                  <i className="ph-bold ph-article" />
-                </a>
-              </li>
-              <li className="menu__item">
                 <a className="menu__link btn" href="#contact">
                   <span className="menu__caption">Contact</span>
                   <i className="ph-bold ph-envelope" />
@@ -47,16 +52,19 @@ const Header = () => {
         <div className="header__controls d-flex justify-content-end">
           <button
             id="color-switcher"
-            className="color-switcher header__switcher btn"
+            className="menu__link btn active"
             type="button"
             role="switch"
             aria-label="light/dark mode"
-            aria-checked="true"
-          />
+            aria-checked={isDarkMode}
+            onClick={toggleColorScheme}
+          >
+            {isDarkMode ? "☾" : "☀︎"}
+          </button>
           <a
             id="notify-trigger"
             className="header__trigger btn"
-            href="mailto:example@example.com?subject=Message%20from%20your%20site"
+            href="mailto:axandradeen@gmail.com"
           >
             <span className="trigger__caption">Let's Talk</span>
             <i className="ph-bold ph-chat-dots" />
