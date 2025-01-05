@@ -107,7 +107,7 @@ const MyProfileCard = () => {
                 {/* <li className="socials-square__item">
                   <a
                     className="socials-square__link btn"
-                    href="https://www.behance.net/"
+                    href="https://behance.net/"
                     target="_blank"
                   >
                     <i className="ph-bold ph-behance-logo" />
@@ -116,7 +116,7 @@ const MyProfileCard = () => {
                 <li className="socials-square__item">
                   <a
                     className="socials-square__link btn"
-                    href="https://www.instagram.com/"
+                    href="https://instagram.com/axandra_deenn"
                     target="_blank"
                   >
                     <i className="ph-bold ph-instagram-logo" />
@@ -125,16 +125,16 @@ const MyProfileCard = () => {
                 <li className="socials-square__item">
                   <a
                     className="socials-square__link btn"
-                    href="https://www.twitch.tv/"
+                     href="https://pinterest.com/axandradeen/"
                     target="_blank"
                   >
-                    <i className="ph-bold ph-twitch-logo" />
+                    <i className="ph-bold ph-pinterest-logo" />
                   </a>
                 </li>
                 <li className="socials-square__item">
                   <a
                     className="socials-square__link btn"
-                    href="https://www.pinterest.com/"
+                    href="https://x.com/axandra_deenn"
                     target="_blank"
                   >
                     <i className="ph-bold ph-twitter-logo" />

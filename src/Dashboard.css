@@ -1,0 +1,244 @@
+/* Container and Layout */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.dashboard-title {
+  text-align: center;
+  color: #6950c6;
+  margin-bottom: 40px;
+  font-size: 2.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Card Layout */
+.dashboard-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.dashboard-card {
+  flex: 1 1 45%;
+  background: #ffffff;
+  padding: 30px;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Headings */
+.dashboard-subtitle {
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  text-transform: capitalize;
+}
+
+/* Inputs and Text Areas */
+.dashboard-input,
+.dashboard-textarea {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-input:focus,
+.dashboard-textarea:focus {
+  border-color: #6950c6;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.25);
+}
+
+.dashboard-textarea {
+  resize: none;
+  height: 120px;
+}
+
+/* Image Preview */
+.dashboard-image-preview {
+  max-height: 300px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 20px;
+  border: 2px solid #eaeaea;
+  transition: transform 0.3s ease;
+}
+
+.dashboard-image-preview:hover {
+  transform: scale(1.02);
+}
+
+/* Buttons */
+.dashboard-button {
+  width: 100%;
+  padding: 14px 20px;
+  background-color: #6950c6;
+  border-color: #6950c6;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dashboard-button:hover {
+  background-color: #3a2f64;
+  transform: scale(1.02);
+}
+
+/* Table Styling */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 20px; /* Added margin for spacing */
+}
+
+.table th,
+.table td {
+  padding: 18px;
+  text-align: left;
+  border: 1px solid #ddd;
+  word-wrap: break-word;
+  vertical-align: middle; /* Added vertical alignment for consistency */
+}
+
+.table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  color: #333; /* Ensure header text stands out */
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table img.project-image {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover; /* Ensure image is contained properly */
+}
+
+/* No Projects Message */
+.no-projects {
+  text-align: center;
+  font-style: italic;
+  color: #888;
+  font-size: 1.1rem;
+  margin-top: 20px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .dashboard-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .dashboard-card {
+    flex: 1 1 100%;
+  }
+
+  .table th,
+  .table td {
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  .table img.project-image {
+    width: 80px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .dashboard-title {
+    font-size: 2rem;
+  }
+
+  .dashboard-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .dashboard-button {
+    font-size: 1rem;
+  }
+
+  .dashboard-input,
+  .dashboard-textarea {
+    font-size: 0.9rem;
+  }
+
+  .table {
+    font-size: 1rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+.dashboard-top-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-bottom: 20px; /* Space between buttons and content below */
+}
+
+.dashboard-btn {
+  padding: 12px 20px;
+  background-color: #6950c6;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dashboard-btn:hover {
+  background-color: #3a2f64;
+  transform: scale(1.05);
+}
+
+/* Responsive Design for Buttons */
+@media screen and (max-width: 768px) {
+  .dashboard-top-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
