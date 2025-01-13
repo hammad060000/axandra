@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "./firebaseConfig";
@@ -25,7 +26,7 @@ const ProjectDetail = () => {
   };
 
   useEffect(() => {
-    getProjectById(); // Fetch the project when the component mounts
+    getProjectById();
   }, []);
 
   return (
@@ -77,6 +78,7 @@ const ProjectDetail = () => {
                 ))}
               </div>
               <p className="small">{project?.description}</p>
+              <p className="small">{project?.type}</p>
             </div>
           </div>
         </div>
