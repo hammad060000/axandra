@@ -8,17 +8,15 @@ const AdminLogin = () => {
   const navigate = useNavigate();
 
   // Static credentials (you can replace these with actual API calls)
-  const validEmail = "admin@example.com";
-  const validPassword = "password123";
+  const validEmail = "axandra@gmail.com";
+  const validPassword = "wrongpass?";
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (email === validEmail && password === validPassword) {
-      // Save token to localStorage (You can replace this with an actual token from API)
       localStorage.setItem("token", "your_token_here");
 
-      // Navigate to /admin/project
       navigate("/admin/project");
     } else {
       setError("Invalid email or password.");
@@ -67,6 +65,7 @@ const AdminLogin = () => {
 const styles = {
   container: {
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     height: "100vh",
