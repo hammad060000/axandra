@@ -1,6 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { db } from "./firebaseConfig"; // Import Firebase services
-import { collection, addDoc, onSnapshot, doc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import "./Dashboard.css";
 import { useNavigate } from "react-router-dom";
 
@@ -23,11 +30,35 @@ const Dashboard = () => {
   const [type, SetType] = useState("");
   const [date, setDate] = useState("");
 
+  const token = localStorage.getItem("token");
+
   const navigate = useNavigate();
 
   const handleAddToolInput = () => {
     setTools([...tools, ""]);
   };
+
+  function getFileType(url) {
+    if (!url) return "Unknown";
+
+    const extension = url.split(".").pop().split("?")[0].toLowerCase();
+
+    const imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "svg", "webp"];
+    if (imageExtensions.includes(extension)) {
+      return "Image";
+    }
+
+    const videoExtensions = ["mp4", "mov", "avi", "mkv", "webm", "flv"];
+    if (videoExtensions.includes(extension)) {
+      return "Video";
+    }
+
+    if (url.includes("github.com")) {
+      return "Git Repository";
+    }
+
+    return "Unknown";
+  }
 
   const handleToolChange = (index, value) => {
     const newTools = [...tools];
@@ -78,13 +109,18 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    if (!token) {
+      navigate("/");
+    }
     getProject();
   }, []);
 
   return (
     <div className="dashboard-container">
       <div className="dashboard-top-buttons">
-        <button className="dashboard-btn" onClick={() => navigate("/")}>Go Back To Home</button>
+        <button className="dashboard-btn" onClick={() => navigate("/")}>
+          Go Back To Home
+        </button>
         <button
           className="dashboard-btn"
           onClick={() => navigate("/admin/pass=wrongpass@/messages")}
@@ -210,14 +246,28 @@ const Dashboard = () => {
               projects.map((project, i) => (
                 <tr key={i}>
                   <td>
-                    {project.imageUrl && (
-                      <img
-                        src={project.imageUrl}
-                        alt="Project"
-                        className="project-image"
-                        style={{ width: "100px", height: "auto" }}
-                      />
-                    )}
+                    <div>
+                      {getFileType(project?.imageUrl) === "Video" ? (
+                        <video
+                          className="project-image"
+                          playsInline
+                          autoPlay
+                          loop
+                          muted
+                          style={{ width: "100px", height: "auto" }}
+                        >
+                          <source src={project?.imageUrl} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+                      ) : (
+                        <img
+                          src={project.imageUrl}
+                          alt="Project"
+                          className="project-image"
+                          style={{ width: "100px", height: "auto" }}
+                        />
+                      )}
+                    </div>
                   </td>
                   <td>{project.tools && project.tools.join(", ")}</td>
                   <td>{project.description}</td>
@@ -226,7 +276,6 @@ const Dashboard = () => {
                   <td>
                     <button
                       className="btn btn-danger"
-                
                       onClick={() => handleDeleteProject(project.id)}
                     >
                       Trash

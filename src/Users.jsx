@@ -21,9 +21,10 @@ function Users() {
   const [description, setdescription] = useState("");
   const [project, setProject] = useState([]);
   const [allProject, setAllProject] = useState([]);
-  const [type, setType] = useState('all');
+  const [type, setType] = useState("all");
   const [theme, setTheme] = useState("");
-console.log(project,'projectproject')
+  const [loader, setLoader] = useState(false);
+  console.log(project, "projectproject");
   const buttonJson = [
     {
       name: "all",
@@ -57,20 +58,23 @@ console.log(project,'projectproject')
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoader(true);
       await addDoc(collection(db, "messages"), {
         name: name,
         username: username,
         email: email,
         description: description,
       });
+      setLoader(false);
       alert("Thanks for submittion!");
     } catch (error) {
       console.error("Error adding document: ", error);
+      setLoader(false);
     }
   };
-  console.log(project, "fiofueh");
 
   const getProjects = () => {
+    
     const usersRef = collection(db, "projects");
     onSnapshot(usersRef, (snapshot) => {
       const fetchedProjects = snapshot.docs.map((doc) => ({
@@ -85,6 +89,29 @@ console.log(project,'projectproject')
   useEffect(() => {
     getProjects();
   }, []);
+
+  function getFileType(url) {
+    if (!url) return "Unknown";
+
+    const extension = url.split(".").pop().split("?")[0].toLowerCase();
+
+    const imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "svg", "webp"];
+    if (imageExtensions.includes(extension)) {
+      return "Image";
+    }
+
+    const videoExtensions = ["mp4", "mov", "avi", "mkv", "webm", "flv"];
+    if (videoExtensions.includes(extension)) {
+      return "Video";
+    }
+
+    if (url.includes("github.com")) {
+      return "Git Repository";
+    }
+
+    return "Unknown";
+  }
+
   const handleType = (typee) => {
     setType(typee);
 
@@ -136,11 +163,11 @@ console.log(project,'projectproject')
   return (
     <>
       {/* <div id="loader" className="loader">
-    <div id="loaderContent" className="loader__content">
-      <div className="loader__shadow" />
-      <div className="loader__box" />
-    </div>
-  </div> */}
+        <div id="loaderContent" className="loader__content">
+          <div className="loader__shadow" />
+          <div className="loader__box" />
+        </div>
+      </div> */}
       {/* Loader End */}
 
       <Header setTheme={setTheme} />
@@ -312,38 +339,69 @@ console.log(project,'projectproject')
                 >
                   {/* Works Gallery Single Item Start 23*/}
 
-                  {project?.length > 0 ? project?.map((project, index) => (
-                    <figure
-                      key={index}
-                      className="col-12 col-md-6 gallery__item grid-item animate-card-2"
-                      onClick={() => {
-                        navigate(`/project/${project?.id}`);
-                      }}
-                    >
-                      <div className="gallery__link">
-                        <img
-                          src={project?.imageUrl}
-                          className="gallery__image"
-                          itemProp="thumbnail"
-                          alt={project?.type || "Image"}
-                        />
-                      </div>
-                      <figcaption
-                        className="gallery__descr"
-                        itemProp="caption description"
+                  {project?.length > 0 ? (
+                    project?.map((project, index) => (
+                      <figure
+                        key={index}
+                        className="col-12 col-md-6 gallery__item grid-item animate-card-2"
+                        onClick={() => {
+                          navigate(`/project/${project?.id}`);
+                        }}
                       >
-                        <h5>Isometric House</h5>
-                        <div className="card__tags d-flex flex-wrap">
-                          {project?.tools?.map((tool, i) => (
-                            <span key={i} className="rounded-tag opposite">
-                              {tool}
-                            </span>
-                          ))}
+                        <div className="gallery__link">
+                          {getFileType(project?.imageUrl) === "Video" ? (
+                            <video
+                              className="gallery__image"
+                              playsInline
+                              autoPlay
+                              loop
+                              muted
+                              poster={project?.poster || ""}
+                            >
+                              <source
+                                src={project?.imageUrl}
+                                type="video/mp4"
+                              />
+                              Your browser does not support the video tag.
+                            </video>
+                          ) : (
+                            <img
+                              src={project?.imageUrl}
+                              className="gallery__image"
+                              itemProp="thumbnail"
+                              alt={project?.type || "Image"}
+                            />
+                          )}
                         </div>
-                        <p className="small">{project?.description}</p>
-                      </figcaption>
-                    </figure>
-                  )) : <p className="content__block pt-md-5 pt-4">No data found in <span style={{textTransform:"capitalize"}}>{type}</span> category</p>}
+                        <figcaption
+                          className="gallery__descr"
+                          itemProp="caption description"
+                        >
+                          {/* <h5>Isometric House</h5>de */}
+                          <div className="card__tags d-flex flex-wrap">
+                            {project?.tools?.map((tool, i) => (
+                              <span key={i} className="rounded-tag opposite">
+                                {tool}
+                              </span>
+                            ))}
+
+                            <span className="rounded-tag opposite">
+                              {getFileType(project?.imageUrl)}
+                            </span>
+                          </div>
+                          <p className="small">{project?.description}</p>
+                        </figcaption>
+                      </figure>
+                    ))
+                  ) : (
+                    <p className="content__block pt-md-5 pt-4">
+                      No data found in{" "}
+                      <span style={{ textTransform: "capitalize" }}>
+                        {type}
+                      </span>{" "}
+                      category
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
