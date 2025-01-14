@@ -74,7 +74,6 @@ function Users() {
   };
 
   const getProjects = () => {
-    
     const usersRef = collection(db, "projects");
     onSnapshot(usersRef, (snapshot) => {
       const fetchedProjects = snapshot.docs.map((doc) => ({
@@ -91,25 +90,16 @@ function Users() {
   }, []);
 
   function getFileType(url) {
-    if (!url) return "Unknown";
-
-    const extension = url.split(".").pop().split("?")[0].toLowerCase();
-
+    const extension = url.split(".").pop().split("?")[0];
+    console.log(extension, "extensiotnjsadhg");
     const imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "svg", "webp"];
     if (imageExtensions.includes(extension)) {
       return "Image";
     }
-
     const videoExtensions = ["mp4", "mov", "avi", "mkv", "webm", "flv"];
     if (videoExtensions.includes(extension)) {
       return "Video";
     }
-
-    if (url.includes("github.com")) {
-      return "Git Repository";
-    }
-
-    return "Unknown";
   }
 
   const handleType = (typee) => {
@@ -351,11 +341,16 @@ function Users() {
                         <div className="gallery__link">
                           {getFileType(project?.imageUrl) === "Video" ? (
                             <video
-                              className="gallery__image"
                               playsInline
                               autoPlay
                               loop
                               muted
+                              style={{
+                                objectPosition: "center",
+                                objectFit: "contain",
+                                width: "100%",
+                                height: "100%",
+                              }}
                               poster={project?.poster || ""}
                             >
                               <source
@@ -367,7 +362,7 @@ function Users() {
                           ) : (
                             <img
                               src={project?.imageUrl}
-                              className="gallery__image"
+                              // className="gallery__image"
                               itemProp="thumbnail"
                               alt={project?.type || "Image"}
                             />
@@ -385,9 +380,9 @@ function Users() {
                               </span>
                             ))}
 
-                            <span className="rounded-tag opposite">
+                            {/* <span className="rounded-tag opposite">
                               {getFileType(project?.imageUrl)}
-                            </span>
+                            </span> */}
                           </div>
                           <p className="small">{project?.description}</p>
                         </figcaption>

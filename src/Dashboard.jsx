@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { db } from "./firebaseConfig"; // Import Firebase services
@@ -127,6 +128,9 @@ const Dashboard = () => {
         >
           Messages
         </button>
+        <a className="dashboard-btn" href="https://imgur.com/" target="_blank">
+          Upload Image login with axandra gmail
+        </a>
       </div>
 
       <h1 className="dashboard-title">Add Project</h1>
@@ -211,13 +215,20 @@ const Dashboard = () => {
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
             />
-            {imageUrl && (
-              <img
-                src={imageUrl}
-                alt="Preview"
-                className="dashboard-image-preview"
-              />
-            )}
+            {imageUrl &&
+              (getFileType(imageUrl) === "Video" ? (
+                <video
+                  src={imageUrl}
+                  className="dashboard-image-preview"
+                  controls
+                ></video>
+              ) : (
+                <img
+                  src={imageUrl}
+                  alt="Preview"
+                  className="dashboard-image-preview"
+                />
+              ))}
             <button
               type="submit"
               className="btn btn-primary dashboard-button mt-4"
@@ -261,7 +272,7 @@ const Dashboard = () => {
                         </video>
                       ) : (
                         <img
-                          src={project.imageUrl}
+                          src={project?.imageUrl}
                           alt="Project"
                           className="project-image"
                           style={{ width: "100px", height: "auto" }}
@@ -274,6 +285,14 @@ const Dashboard = () => {
                   <td>{project.type}</td>
                   <td>{project.date}</td>
                   <td>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() =>
+                        navigate("/edit-project", { state: { project } })
+                      }
+                    >
+                      Edit
+                    </button>
                     <button
                       className="btn btn-danger"
                       onClick={() => handleDeleteProject(project.id)}

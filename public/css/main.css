@@ -3655,11 +3655,11 @@ form textarea:required:valid {
   -ms-flex-align: center;
   align-items: center;
   height: 3.4rem;
-  padding: 0 1.4rem;
+  padding: 0 1rem;
   margin: 0.5rem 1rem 0.5rem 0;
   -moz-border-radius: var(--_radius-s);
   border-radius: var(--_radius-s);
-  font: normal 400 1.5rem/1 var(--_font-default);
+  font: normal 400 1.2rem/1 var(--_font-default);
   font-variant-numeric: lining-nums;
   background-color: transparent;
   border: 1px solid var(--per-stroke-controls);

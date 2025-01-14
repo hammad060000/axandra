@@ -11,6 +11,7 @@ const ProjectDetail = () => {
   const { id } = useParams();
   const [project, setProject] = useState({});
   const [loader, setLoader] = useState(false);
+  const [short, setShort] = useState(true);
   console.log(project, "safkjef");
   const getProjectById = async () => {
     const docRef = doc(db, "projects", id);
@@ -63,7 +64,6 @@ const ProjectDetail = () => {
   return (
     <>
       {loader && <LoadingScreen />}
-
       <div
         className="pswp pswp--supports-fs pswp--open pswp--animate_opacity pswp--notouch pswp--css_animation pswp--svg pswp--animated-in pswp--zoom-allowed pswp--visible pswp--has_mouse"
         tabIndex={-1}
@@ -128,11 +128,34 @@ const ProjectDetail = () => {
                     </span>
                   ))}
                 </div>
-                <p className="small">{`${project?.description?.slice(
-                  0,
-                  50
-                )}......`}</p>
-                <p className="small">{formatDate(project?.date)}</p>
+
+                {short ? (
+                  <p className="small">
+                    {`${project?.description?.slice(0, 50)}..... `}
+                    <span
+                      onClick={() => setShort(false)}
+                      style={{ cursor: "pointer", color: "#aa70e0" }}
+                    >
+                      View more
+                    </span>
+                  </p>
+                ) : (
+                  <p className="small">
+                    {project?.description.concat(" ")}
+                    <span
+                      onClick={() => setShort(true)}
+                      style={{ cursor: "pointer", color: "#aa70e0" }}
+                    >
+                      View less
+                    </span>
+                  </p>
+                )}
+                <p className="small">
+                  Delivered At:{" "}
+                  <span style={{ cursor: "pointer", color: "#aa70e0" }}>
+                    {formatDate(project?.date)}
+                  </span>
+                </p>
               </div>
             </div>
           </div>
