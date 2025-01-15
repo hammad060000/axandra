@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 
-const Header = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+const Header = ({ setTheme }) => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleColorScheme = () => {
     const htmlElement = document.documentElement; // Refers to <html>
+    console.log(htmlElement, "htmlElement");
     if (isDarkMode) {
       htmlElement.setAttribute("color-scheme", "light");
     } else {
@@ -12,6 +14,9 @@ const Header = () => {
     }
     setIsDarkMode(!isDarkMode); // Toggle state
   };
+  useEffect(() => {
+    setTheme(isDarkMode);
+  }, [isDarkMode]);
   return (
     <>
       {/* Header Start */}

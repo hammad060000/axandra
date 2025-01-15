@@ -35,84 +35,88 @@
 // ------------------------------------------------
 
 $(function() {
-
   "use strict";
-
   gsap.registerPlugin(ScrollTrigger);
-
-  // --------------------------------------------- //
-  // Loader & Loading Animation Start
-  // --------------------------------------------- //
-  const content = document.querySelector('body');
+  const content = document.querySelector('html');
   const imgLoad = imagesLoaded(content);
-
   imgLoad.on('done', instance => {
-
     document.getElementById("loaderContent").classList.add("fade-out");
     setTimeout(() => {
       document.getElementById("loader").classList.add("loaded");
     }, 300);
-
     gsap.set(".animate-headline", {y: 50, opacity: 0});
     ScrollTrigger.batch(".animate-headline", {
       interval: 0.1,
       batchMax: 4,
       duration: 6,
       onEnter: batch => gsap.to(batch, {
-        opacity: 1, 
-        y: 0,
-        ease: 'sine',
-        stagger: {each: 0.15, grid: [1, 4]}, 
-        overwrite: true
+      opacity: 1, 
+      y: 0,
+      ease: 'sine',
+      stagger: {each: 0.15, grid: [1, 4]}, 
+      overwrite: true
       }),
       onLeave: batch => gsap.set(batch, {opacity: 1, y: 0, overwrite: true}),
       onEnterBack: batch => gsap.to(batch, {opacity: 1, y: 0, stagger: 0.15, overwrite: true}),
       onLeaveBack: batch => gsap.set(batch, {opacity: 0, y: 50, overwrite: true})
     });
-
   });
-  // --------------------------------------------- //
-  // Loader & Loading Animation End
-  // --------------------------------------------- //
 
-  // --------------------------------------------- //
-  // Bootstrap Scroll Spy Plugin Settings Start
-  // --------------------------------------------- //
-  const scrollSpy = new bootstrap.ScrollSpy(document.body, {
-    target: '#menu',
-    smoothScroll: true,
-    rootMargin: '0px 0px -40%',
-  });
-  // --------------------------------------------- //
-  // Bootstrap Scroll Spy Plugin Settings End
-  // --------------------------------------------- //
 
-  // --------------------------------------------- //
-  // Lenis Scroll Plugin Start
-  // --------------------------------------------- //
-  const lenis = new Lenis()
-  function raf(time) {
-    lenis.raf(time)
-    requestAnimationFrame(raf)
-  }
-  requestAnimationFrame(raf)
-  // --------------------------------------------- //
-  // Lenis Scroll Plugin End
-  // --------------------------------------------- //
 
-  // ------------------------------------------------------------------------------ //
-  // Parallax (apply parallax effect to any element with a data-speed attribute) Start
-  // ------------------------------------------------------------------------------ //
-  gsap.to("[data-speed]", {
-    y: (i, el) => (1 - parseFloat(el.getAttribute("data-speed"))) * ScrollTrigger.maxScroll(window) ,
-    ease: "none",
-    scrollTrigger: {
-      start: 0,
-      end: "max",
-      invalidateOnRefresh: true,
-      scrub: 0
-    }
-  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+  //   target: '#menu',
+  //   smoothScroll: true,
+  //   rootMargin: '0px 0px -40%',
+  // });
+  // const lenis = new Lenis()
+  // function raf(time) {
+  //   lenis.raf(time)
+  //   requestAnimationFrame(raf)
+  // }
+  // requestAnimationFrame(raf)
+  // gsap.to("[data-speed]", {
+  //   y: (i, el) => (1 - parseFloat(el.getAttribute("data-speed"))) * ScrollTrigger.maxScroll(window) ,
+  //   ease: "none",
+  //   scrollTrigger: {
+  //     start: 0,
+  //     end: "max",
+  //     invalidateOnRefresh: true,
+  //     scrub: 0
+  //   }
+  // });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // --------------------------------------------- //
   // Parallax End
   // --------------------------------------------- //
