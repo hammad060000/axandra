@@ -251,57 +251,6 @@ $(function() {
   // --------------------------------------------- //
   // Swiper Slider Start
   // --------------------------------------------- //
-  const toolsSlider = document.querySelector("tools-slider");
-  const testimonialsSlider = document.querySelector("testimonials-slider");
-
-  if (!toolsSlider) {
-    const swiper = new Swiper('.swiper-tools', {
-      spaceBetween: 20,
-      autoplay: {
-        delay: 1500,
-        disableOnInteraction: false,
-      },
-      loop: true,
-      grabCursor: true,
-      loopFillGroupWithBlank: true,
-      breakpoints: {
-        1600: {
-          slidesPerView: 5,
-        },
-        1200: {
-          slidesPerView: 4,
-        },
-        768: {
-          slidesPerView: 3,
-        },
-        576: {
-          slidesPerView: 2,
-        },
-        0: {
-          slidesPerView: 2,
-        }
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true
-      },
-    });
-  };
-
-  if (!toolsSlider) {
-    const swiper = new Swiper('.swiper-testimonials', {
-      slidesPerView: 1,
-      spaceBetween: 20,
-      autoplay: true,
-      speed: 1000,
-      loop: true,
-      loopFillGroupWithBlank: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
-  };
   // --------------------------------------------- //
   // Swiper Slider Start
   // --------------------------------------------- //

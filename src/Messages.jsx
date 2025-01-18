@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { db } from "./firebaseConfig";
 import { collection, onSnapshot } from "firebase/firestore";
+import TopButtons from "./component/TopButtons";
 
 const Messages = () => {
   const [users, setUsers] = useState([]);
@@ -18,9 +19,9 @@ const Messages = () => {
   useEffect(() => {
     getUsersRealtime();
   }, []);
-console.log(users,'usersAHDSJA')
   return (
     <div className="dashboard-container">
+      <TopButtons />
       <h1 className="dashboard-title">Users and Messages</h1>
 
       <div className="dashboard-card mt-4">

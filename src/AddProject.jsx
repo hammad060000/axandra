@@ -1,21 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { db } from "./firebaseConfig"; // Import Firebase services
-import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
-import { useLocation, useNavigate } from "react-router-dom";
-import "./Project.css";
+import { db } from "./firebaseConfig";
+import { useNavigate } from "react-router-dom";
+import TopButtons from "./component/TopButtons";
 
-const EditProject = () => {
-  const { state } = useLocation();
+const AddProject = () => {
   const navigate = useNavigate();
-  const project = state?.project;
-
-  const [tools, setTools] = useState(project?.tools || [""]);
-  const [description, setDescription] = useState(project?.description || "");
-  const [imageUrl, setImageUrl] = useState(project?.imageUrl || "");
-  const [type, SetType] = useState(project?.type || "");
-  const [date, setDate] = useState(project?.date || "");
-
   const [buttonJson, setButtonJson] = useState([]);
   const token = localStorage.getItem("token");
 
@@ -34,14 +24,19 @@ const EditProject = () => {
     }
     getCategory();
   }, []);
+
+  const [tools, setTools] = useState([""]);
+  const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [type, SetType] = useState("");
+  const [date, setDate] = useState("");
+  const handleAddToolInput = () => {
+    setTools([...tools, ""]);
+  };
   const handleToolChange = (index, value) => {
     const newTools = [...tools];
     newTools[index] = value;
     setTools(newTools);
-  };
-
-  const handleAddToolInput = () => {
-    setTools([...tools, ""]);
   };
 
   const handleRemoveToolInput = (index) => {
@@ -49,67 +44,46 @@ const EditProject = () => {
     setTools(newTools);
   };
 
-  const handleUpdateProject = async (e) => {
+  const handleAddProject = async (e) => {
     e.preventDefault();
     try {
-      const projectRef = doc(db, "projects", project.id);
-      await updateDoc(projectRef, {
+      await addDoc(collection(db, "projects"), {
         tools,
         description,
         imageUrl,
         type,
         date,
       });
-      alert("Project updated successfully!");
       navigate("/admin/project");
     } catch (error) {
-      console.error("Error updating project: ", error);
+      console.error("Error adding document: ", error);
     }
   };
+  function getFileType(url) {
+    if (!url) return "Unknown";
 
+    const extension = url.split(".").pop().split("?")[0].toLowerCase();
+
+    const imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "svg", "webp"];
+    if (imageExtensions.includes(extension)) {
+      return "Image";
+    }
+
+    const videoExtensions = ["mp4", "mov", "avi", "mkv", "webm", "flv"];
+    if (videoExtensions.includes(extension)) {
+      return "Video";
+    }
+
+    if (url.includes("github.com")) {
+      return "Git Repository";
+    }
+  }
   return (
-    <div className="dashboard-container">
-      <div className="dashboard-top-buttons">
-        <button className="dashboard-btn" onClick={() => navigate("/")}>
-          Go Back To Home
-        </button>
-        <button
-          className="dashboard-btn"
-          onClick={() => navigate("/admin/message")}
-        >
-          Messages
-        </button>
-        <button
-          className="dashboard-btn"
-          onClick={() => navigate("/admin/category")}
-        >
-          Category
-        </button>
-        <button
-          className="dashboard-btn"
-          onClick={() => navigate("/admin/project")}
-        >
-          Projects
-        </button>
-        <button
-          className="dashboard-btn"
-          onClick={() => navigate("/admin/addproject")}
-        >
-          Add Project
-        </button>
-        <a
-          className="dashboard-btn"
-          href="https://imgur.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Upload Image login with axandra gmail
-        </a>
-      </div>
+    <div className="container py-5">
+      <TopButtons />
+      <h1 className="dashboard-title">Add Project</h1>
 
-      <h1 className="dashboard-title">Edit Project</h1>
-
-      <form onSubmit={handleUpdateProject} className="dashboard-form">
+      <form onSubmit={handleAddProject} className="dashboard-form">
         <div className="dashboard-row">
           <div className="dashboard-card">
             <h3 className="dashboard-subtitle">Tools:</h3>
@@ -157,15 +131,14 @@ const EditProject = () => {
             <h3 className="dashboard-subtitle">Select Type:</h3>
             <select
               onChange={(e) => SetType(e.target.value)}
-              value={type}
               style={{ textTransform: "capitalize" }}
               className="form-control dashboard-input"
               required
             >
               <option value="">Select Type</option>
-              {buttonJson.map((e, i) => (
-                <option key={i} value={e.name}>
-                  {e.name}
+              {buttonJson?.map((e, i) => (
+                <option key={i} value={e?.name}>
+                  {e?.name}
                 </option>
               ))}
             </select>
@@ -190,18 +163,25 @@ const EditProject = () => {
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
             />
-            {imageUrl && (
-              <img
-                src={imageUrl}
-                alt="Preview"
-                className="dashboard-image-preview"
-              />
-            )}
+            {imageUrl &&
+              (getFileType(imageUrl) === "Video" ? (
+                <video
+                  src={imageUrl}
+                  className="dashboard-image-preview"
+                  controls
+                ></video>
+              ) : (
+                <img
+                  src={imageUrl}
+                  alt="Preview"
+                  className="dashboard-image-preview"
+                />
+              ))}
             <button
               type="submit"
               className="btn btn-primary dashboard-button mt-4"
             >
-              Update Project
+              Add Project
             </button>
           </div>
         </div>
@@ -210,4 +190,4 @@ const EditProject = () => {
   );
 };
 
-export default EditProject;
+export default AddProject;

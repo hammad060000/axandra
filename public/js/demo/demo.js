@@ -320,5 +320,7 @@ window.addEventListener("scroll", function() {
   currentScroll = window.pageYOffset;
 });
 // --------------------------------------------- //
+
 // Marquee End
 // --------------------------------------------- //
+
