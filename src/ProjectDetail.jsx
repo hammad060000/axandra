@@ -3,16 +3,18 @@ import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "./firebaseConfig";
 import { useNavigate, useParams } from "react-router-dom";
-import "./ProjectDetail.css"; // External CSS file for responsive styling
+import "./ProjectDetail.css";
 import { LoadingScreen } from "./component/loadingScreen";
+import FeedbackModal from "./ReviewBox";
 
 const ProjectDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [project, setProject] = useState({});
   const [loader, setLoader] = useState(false);
+  const [modalClosed, setModalClosed] = useState(false);
+  const [reviewModal, setReviewModal] = useState(false);
   const [short, setShort] = useState(true);
-  console.log(project, "safkjef");
   const getProjectById = async () => {
     const docRef = doc(db, "projects", id);
 
@@ -60,9 +62,26 @@ const ProjectDetail = () => {
   useEffect(() => {
     getProjectById();
   }, []);
+  useEffect(() => {
+    getProjectById();
+  }, []);
 
+  useEffect(() => {
+    if (!modalClosed) {
+      const interval = setInterval(() => {
+        setReviewModal(true);
+      }, 4000);
+
+      return () => clearInterval(interval);
+    }
+  }, [modalClosed]);
+
+  const handleModalClose = () => {
+    setReviewModal(false);
+    setModalClosed(true); // Mark the modal as closed
+  };
   return (
-    <>
+    <div style={{ position: "relative" }}>
       {loader && <LoadingScreen />}
       <div
         className="pswp pswp--supports-fs pswp--open pswp--animate_opacity pswp--notouch pswp--css_animation pswp--svg pswp--animated-in pswp--zoom-allowed pswp--visible pswp--has_mouse"
@@ -120,7 +139,6 @@ const ProjectDetail = () => {
 
             <div className="pswp__caption">
               <div className="pswp__caption__center">
-                {/* <h5 className="opposite">Details :</h5> */}
                 <div className="card__tags d-flex flex-wrap">
                   {project?.tools?.map((e, i) => (
                     <span className="rounded-tag" key={i}>
@@ -161,7 +179,8 @@ const ProjectDetail = () => {
           </div>
         </div>
       </div>
-    </>
+      {reviewModal && <FeedbackModal handleModalClose={handleModalClose} />}
+    </div>
   );
 };
 

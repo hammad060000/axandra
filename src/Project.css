@@ -243,16 +243,28 @@
   }
 }
 
-.btn.btn-danger{
-  background: #E62E2D;
-  border: 1px solid #E62E2D;
+.btn:hover {
+  background: transparent;
+}
+.dashboard-container .btn {
   color: #fff;
   padding: 5px 20px;
   border-radius: 7px;
   font-size: 16px;
   transition: 0.3s;
+  width: 100%;
 }
-.btn.btn-danger:hover{
-  background: transparent;
-  color: #E62E2D;
+.btn-danger:hover {
+  color: #e62e2d;
+}
+.btn-danger {
+  border: 1px solid #e62e2d;
+  background: #e62e2d;
+}
+.btn-sucess:hover {
+  color: #13af2d;
+}
+.btn-sucess {
+  border: 1px solid #13af2d;
+  background: #13af2d;
 }
