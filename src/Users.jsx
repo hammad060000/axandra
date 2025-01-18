@@ -27,7 +27,6 @@ function Users() {
   const [theme, setTheme] = useState("");
   const [loader, setLoader] = useState(false);
   const [buttonJson, setButtonJson] = useState([]);
-  const token = localStorage.getItem("token");
 
   const getCategory = () => {
     const projectRef = collection(db, "categories");
@@ -81,13 +80,9 @@ function Users() {
   };
 
   useEffect(() => {
-    if (!token) {
-      navigate("/");
-    } else {
-      getProjects();
-      getReview();
-      getCategory();
-    }
+    getProjects();
+    getReview();
+    getCategory();
   }, []);
 
   function getFileType(url) {
