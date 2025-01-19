@@ -115,7 +115,6 @@ const ProjectDetail = () => {
                     loop
                     muted
                     controls
-                    poster={project?.poster || ""}
                   >
                     <source src={project?.imageUrl} type="video/mp4" />
                     Your browser does not support the video tag.
@@ -133,7 +132,11 @@ const ProjectDetail = () => {
               <button
                 className="pswp__button pswp__button--close link-s"
                 title="Close (Esc)"
-                onClick={() => navigate("/")}
+                onClick={() =>
+                  navigate("/", {
+                    state: { scroll: true, type: project?.type },
+                  })
+                }
               />
             </div>
 
