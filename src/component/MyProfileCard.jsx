@@ -88,7 +88,7 @@ const MyProfileCard = () => {
           <div className="avatar__block">
             <h6>
               <small className="top">Based in:</small>
-              Australis, UAE (Dubai)
+               Australia, UAE (Dubai)
             </h6>
           </div>
           {/* socials and CTA button */}

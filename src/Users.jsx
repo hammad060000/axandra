@@ -26,7 +26,6 @@ function Users() {
   const [project, setProject] = useState([]);
   const galleryRef = useRef(null);
   const location = useLocation();
-  console.log(location, "locationlocation");
   const [allProject, setAllProject] = useState([]);
   const [type, setType] = useState("all");
   const [theme, setTheme] = useState("");
@@ -120,12 +119,6 @@ function Users() {
     700: 1,
     500: 1,
   };
-
-  useEffect(() => {
-    if (location?.state?.type) {
-      handleType(location.state.type);
-    }
-  }, [location]);
 
   return (
     <>
@@ -529,12 +522,8 @@ function Users() {
                         <div className="about-info__item animate-in-up">
                           <h6>
                             <small className="top">Location</small>
-                            <a
-                              className="text-link-bold"
-                              href="https://maps.app.goo.gl/xMJXTEUeHkv6kYRQ6"
-                              target="_blank"
-                            >
-                              Australis, UAE (Dubai)
+                            <a className="text-link-bold" target="_blank">
+                               Australia, UAE (Dubai)
                             </a>
                           </h6>
                         </div>
@@ -793,7 +782,7 @@ function Users() {
                           </p>
                           <p className="contact-lines__text animate-in-up">
                             <a className="text-link-bold">
-                              Australis, UAE (Dubai)
+                               Australia, UAE (Dubai)
                             </a>
                           </p>
                         </div>
