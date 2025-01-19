@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   collection,
   addDoc,
@@ -49,7 +48,7 @@ const Categories = () => {
   }, []);
   const handleDeleteCategory = async (id) => {
     try {
-      await deleteDoc(doc(db, "projects", id));
+      await deleteDoc(doc(db, "categories", id));
       alert("Project deleted successfully!");
     } catch (error) {
       console.error("Error deleting document: ", error);
