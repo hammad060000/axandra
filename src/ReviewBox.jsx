@@ -3,8 +3,8 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
 const FeedbackModal = ({ handleModalClose }) => {
-  const [name, setName] = useState(""); 
-  const [rating, setRating] = useState(0); 
+  const [name, setName] = useState("");
+  const [rating, setRating] = useState(0);
   const [feedback, setFeedback] = useState("");
 
   // Handle form submission
@@ -38,9 +38,7 @@ const FeedbackModal = ({ handleModalClose }) => {
   return (
     <div className="feedback-modal" style={{ position: "absolute" }}>
       <h2>Give feedback</h2>
-      <p>
-        What do you think of the issue search experience within Jira projects?
-      </p>
+      <p>Share your thoughts on this project.</p>
 
       {/* Name Input */}
       <div className="form-group mb-3">
