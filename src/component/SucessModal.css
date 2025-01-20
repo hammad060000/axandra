@@ -1,0 +1,76 @@
+@keyframes slideDown {
+    from {
+      transform: translateY(-200%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .darkThemeColorModal{
+    background: #111111;
+
+  }
+  .lightThemeColorModal{
+    background:#e6ebf4;
+  }
+  .success-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .success-modal-content {
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    max-width: 90%;
+    width: 700px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.5s ease-out;
+  }
+  
+  .checkmark-icon {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 15px;
+    display: block;
+    margin: auto;
+    background: #53297C;
+    padding: 15px;
+    object-position: center;
+    margin-bottom: 20px;
+    clip-path: circle();
+  }
+  .ok-button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .ok-button:hover {
+    background-color: #45a049;
+  }
+  .success-modal-content p {
+    font-size: 19px;
+    font-weight: 800;
+    color: #333;
+    margin: 0;
+  }
+  

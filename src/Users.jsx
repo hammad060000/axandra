@@ -16,6 +16,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import TestimonialsSlider from "./component/TestimonialSlider";
 import Masonry from "react-masonry-css";
 import { LoadingScreen } from "./component/loadingScreen";
+import SuccessModal from "./component/SucessMoodal";
 
 function Users() {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ function Users() {
   const [theme, setTheme] = useState("");
   const [loader, setLoader] = useState(false);
   const [projectLoader, setProjectLoader] = useState(false);
+  const [sucess, setSuccess] = useState(false);
   const [buttonJson, setButtonJson] = useState([]);
 
   const getCategory = () => {
@@ -53,7 +55,11 @@ function Users() {
         description: description,
       });
       setLoader(false);
-      alert("Thanks for submittion!");
+
+      setSuccess(true);
+      setTimeout(() => {
+        setSuccess(false);
+      }, 4000);
     } catch (error) {
       console.error("Error adding document: ", error);
       setLoader(false);
@@ -79,7 +85,6 @@ function Users() {
 
   function getFileType(url) {
     const extension = url.split(".").pop().split("?")[0];
-    console.log(extension, "extensiotnjsadhg");
     const imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "svg", "webp"];
     if (imageExtensions.includes(extension)) {
       return "Image";
@@ -128,12 +133,9 @@ function Users() {
         <>
           <Header setTheme={setTheme} />
           <MyProfileCard />
-          {/* Page Content Start */}
           <div id="content" className="content">
             <div className="content__wrapper">
-              {/* Intro Section Start */}
               <section id="home" className="main intro">
-                {/* Headline Start */}
                 <div
                   id="headline"
                   className="headline d-flex align-items-start flex-column"
@@ -151,8 +153,8 @@ function Users() {
                       <path
                         fill="currentColor"
                         d="M5.6,12.6c-0.5-0.8-0.7-2.4-1.7-3.5c-1-1-2.7-1.2-3.5-1.7C-0.1,7-0.1,6,0.4,5.6c0.8-0.5,2.3-0.6,3.5-1.8
-            C5,2.8,5.1,1.2,5.6,0.4C6-0.1,7-0.1,7.4,0.4c0.5,0.8,0.7,2.4,1.8,3.5c1.2,1.2,2.6,1.2,3.5,1.7c0.6,0.4,0.6,1.4,0,1.7
-            C11.8,7.9,10.2,8,9.1,9.1c-1,1-1.2,2.7-1.7,3.5C7,13.1,6,13.1,5.6,12.6z"
+                          C5,2.8,5.1,1.2,5.6,0.4C6-0.1,7-0.1,7.4,0.4c0.5,0.8,0.7,2.4,1.8,3.5c1.2,1.2,2.6,1.2,3.5,1.7c0.6,0.4,0.6,1.4,0,1.7
+                          C11.8,7.9,10.2,8,9.1,9.1c-1,1-1.2,2.7-1.7,3.5C7,13.1,6,13.1,5.6,12.6z"
                       />
                     </svg>
                     <span>Let's make something awesome together!</span>
@@ -172,14 +174,11 @@ function Users() {
                     </a>
                   </div>
                 </div>
-                {/* Headline End */}
-                {/* Scroll Button Start */}
                 <div className="rotating-btn">
                   <a
                     href="#portfolio"
                     className="rotating-btn__link slide-down"
                   >
-                    {/* SVG rotating text */}
                     <svg
                       version="1.1"
                       xmlns="http://www.w3.org/2000/svg"
@@ -201,23 +200,18 @@ function Users() {
                       <g>
                         <use xlinkHref="#textPath" fill="none" />
                         <text>
-                          {/* button text here!!! */}
                           <textPath xlinkHref="#textPath">
                             Scroll for More * Scroll for More *{" "}
                           </textPath>
                         </text>
                       </g>
                     </svg>
-                    {/* arrow icon */}
                     <i className="ph-bold ph-arrow-down" />
                   </a>
                 </div>
-                {/* Scroll Button End */}
               </section>
 
-              {/* Portfolio Section start */}
               <section id="portfolio" className="inner inner-first portfolio">
-                {/* Content Block - H2 Section Title Start */}
                 <div className="content__block section-grid-title">
                   <p className="h2__subtitle animate-in-up">
                     <svg
@@ -232,8 +226,8 @@ function Users() {
                       <path
                         fill="currentColor"
                         d="M5.6,12.6c-0.5-0.8-0.7-2.4-1.7-3.5c-1-1-2.7-1.2-3.5-1.7C-0.1,7-0.1,6,0.4,5.6c0.8-0.5,2.3-0.6,3.5-1.8
-            C5,2.8,5.1,1.2,5.6,0.4C6-0.1,7-0.1,7.4,0.4c0.5,0.8,0.7,2.4,1.8,3.5c1.2,1.2,2.6,1.2,3.5,1.7c0.6,0.4,0.6,1.4,0,1.7
-            C11.8,7.9,10.2,8,9.1,9.1c-1,1-1.2,2.7-1.7,3.5C7,13.1,6,13.1,5.6,12.6z"
+                          C5,2.8,5.1,1.2,5.6,0.4C6-0.1,7-0.1,7.4,0.4c0.5,0.8,0.7,2.4,1.8,3.5c1.2,1.2,2.6,1.2,3.5,1.7c0.6,0.4,0.6,1.4,0,1.7
+                          C11.8,7.9,10.2,8,9.1,9.1c-1,1-1.2,2.7-1.7,3.5C7,13.1,6,13.1,5.6,12.6z"
                       />
                     </svg>
                     <span>Previous Work.!</span>
@@ -242,9 +236,6 @@ function Users() {
                     Have a look of my previous work..!
                   </h2>
                 </div>
-                {/* Content Block - H2 Section Title End */}
-
-                {/* Content Block - Works Gallery Start */}
                 <div className="content__block grid-block">
                   <div className="container-fluid px-0 inner__gallery">
                     <div
@@ -347,7 +338,6 @@ function Users() {
                                     autoPlay
                                     loop
                                     muted
-                                    // controls
                                     style={{
                                       width: "100%",
                                       height: "auto",
@@ -372,7 +362,6 @@ function Users() {
                                 className="gallery__descr"
                                 itemProp="caption description"
                               >
-                                {/* <h5>Isometric House</h5>de */}
                                 <div className="card__tags d-flex flex-wrap">
                                   {project?.tools?.map((tool, i) => (
                                     <span
@@ -382,10 +371,6 @@ function Users() {
                                       {tool}
                                     </span>
                                   ))}
-
-                                  {/* <span className="rounded-tag opposite">
-                              {getFileType(project?.imageUrl)}
-                            </span> */}
                                 </div>
                                 <p className="small">{project?.description}</p>
                               </figcaption>
@@ -404,13 +389,9 @@ function Users() {
                     </div>
                   </div>
                 </div>
-                {/* Content Block - Works Gallery End */}
               </section>
-              {/* Portfolio Section End */}
 
-              {/* About Section Start */}
               <section id="about" className="inner about">
-                {/* Content Block - H2 Section Title Start */}
                 <div className="content__block section-grid-title">
                   <p className="h2__subtitle animate-in-up">
                     <svg
@@ -435,18 +416,14 @@ function Users() {
                     Turning Imagination Into Art
                   </h2>
                 </div>
-                {/* Content Block - H2 Section Title End */}
-                {/* Content Block - Achievements Start */}
                 <div className="content__block grid-block">
                   <div className="achievements d-flex flex-column flex-md-row align-items-md-stretch">
-                    {/* achievements single item */}
                     <div className="achievements__item d-flex flex-column grid-item animate-card-3">
                       <div className="achievements__card">
                         <p className="achievements__number">40+</p>
                         <p className="achievements__descr">Happy clients</p>
                       </div>
                     </div>
-                    {/* achievements single item */}
                     <div className="achievements__item d-flex flex-column grid-item animate-card-3">
                       <div className="achievements__card">
                         <p className="achievements__number">3+</p>
@@ -455,7 +432,6 @@ function Users() {
                         </p>
                       </div>
                     </div>
-                    {/* achievements single item */}
                     <div className="achievements__item d-flex flex-column grid-item animate-card-3">
                       <div className="achievements__card">
                         <p className="achievements__number">50+</p>
@@ -466,12 +442,9 @@ function Users() {
                     </div>
                   </div>
                 </div>
-                {/* Content Block - Achievements End */}
-                {/* Content Block - About Me Data Start */}
                 <div className="content__block grid-block block-large">
                   <div className="container-fluid p-0">
                     <div className="row g-0 justify-content-between">
-                      {/* About Me Description Start */}
                       <div className="col-12 col-xl-8 grid-item about-descr">
                         <p className="about-descr__text animate-in-up">
                           Creativity is not just about what you see; it's about
@@ -523,7 +496,7 @@ function Users() {
                           <h6>
                             <small className="top">Location</small>
                             <a className="text-link-bold" target="_blank">
-                               Australia, UAE (Dubai)
+                              Australia, UAE (Dubai)
                             </a>
                           </h6>
                         </div>
@@ -532,12 +505,9 @@ function Users() {
                     </div>
                   </div>
                 </div>
-                {/* Content Block - About Me Data End */}
-                {/* Content Block - Services Start */}
                 <div className="content__block grid-block">
                   <div className="container-fluid p-0">
                     <div className="row g-0 align-items-stretch cards">
-                      {/* services cards grid single item */}
                       <div className="col-12 col-md-6 cards__item grid-item animate-card-2">
                         <div className="cards__card d-flex flex-column">
                           <div className="cards__descr">
@@ -601,9 +571,7 @@ function Users() {
                     </div>
                   </div>
                 </div>
-                {/* Content Block - Services End */}
               </section>
-              {/* About Section End */}
 
               <section id="resume" className="inner resume">
                 <div className="content__block section-title">
@@ -693,6 +661,7 @@ function Users() {
                             onChange={(e) => setemail(e.target.value)}
                           />
                         </div>
+
                         <div className="col-12 form__item animate-in-up">
                           <input
                             type="text"
@@ -702,6 +671,14 @@ function Users() {
                             value={username}
                             onChange={(e) => setuserName(e.target.value)}
                           />
+                          <span
+                            className="teaser__text fs-3 pb-4"
+                            style={{ maxWidth: "90%" }}
+                          >
+                            Please make sure your username for Twitter, Discord,
+                            or Instagram is correct, as I will contact you
+                            through it.
+                          </span>
                         </div>
                         <div className="col-12 form__item animate-in-up">
                           <textarea
@@ -782,7 +759,7 @@ function Users() {
                           </p>
                           <p className="contact-lines__text animate-in-up">
                             <a className="text-link-bold">
-                               Australia, UAE (Dubai)
+                              Australia, UAE (Dubai)
                             </a>
                           </p>
                         </div>
@@ -821,6 +798,7 @@ function Users() {
           </div>
         </>
       )}
+      {sucess && <SuccessModal setSuccess={setSuccess} />}
     </>
   );
 }
