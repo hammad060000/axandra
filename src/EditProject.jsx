@@ -67,6 +67,26 @@ const EditProject = () => {
     }
   };
 
+  function getFileType(url) {
+    if (!url) return "Unknown";
+
+    const extension = url.split(".").pop().split("?")[0].toLowerCase();
+
+    const imageExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "svg", "webp"];
+    if (imageExtensions.includes(extension)) {
+      return "Image";
+    }
+
+    const videoExtensions = ["mp4", "mov", "avi", "mkv", "webm", "flv"];
+    if (videoExtensions.includes(extension)) {
+      return "Video";
+    }
+
+    if (url.includes("github.com")) {
+      return "Git Repository";
+    }
+  }
+
   return (
     <div className="dashboard-container">
       <div className="dashboard-top-buttons">
@@ -190,13 +210,20 @@ const EditProject = () => {
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
             />
-            {imageUrl && (
-              <img
-                src={imageUrl}
-                alt="Preview"
-                className="dashboard-image-preview"
-              />
-            )}
+            {imageUrl &&
+              (getFileType(imageUrl) === "Video" ? (
+                <video
+                  src={imageUrl}
+                  className="dashboard-image-preview"
+                  controls
+                ></video>
+              ) : (
+                <img
+                  src={imageUrl}
+                  alt="Preview"
+                  className="dashboard-image-preview"
+                />
+              ))}
             <button
               type="submit"
               className="btn btn-primary dashboard-button mt-4"

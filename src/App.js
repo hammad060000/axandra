@@ -9,6 +9,7 @@ import Project from './Project'
 import Categorys from './Categorys'
 import AddProject from './AddProject'
 import Reviews from './Reviews'
+import SucessMoodal from './component/SucessMoodal'
 
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
    <Router>
    <Routes>
     <Route path="/" element={<Users/>}/>
+    <Route path="/sucess"element={<SucessMoodal/>}/>
     <Route path="/admin"element={<AdminLogin/>}/>
     <Route path="/admin/addproject"element={<AddProject/>}/>
     <Route path="/admin/review"element={<Reviews/>}/>

@@ -5,23 +5,21 @@ const Header = ({ setTheme }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleColorScheme = () => {
-    const htmlElement = document.documentElement; // Refers to <html>
+    const htmlElement = document.documentElement;
     console.log(htmlElement, "htmlElement");
     if (isDarkMode) {
       htmlElement.setAttribute("color-scheme", "light");
     } else {
       htmlElement.setAttribute("color-scheme", "dark");
     }
-    setIsDarkMode(!isDarkMode); // Toggle state
+    setIsDarkMode(!isDarkMode);
   };
   useEffect(() => {
     setTheme(isDarkMode);
   }, [isDarkMode]);
   return (
     <>
-      {/* Header Start */}
       <header id="header" className="header d-flex justify-content-between">
-        {/* Navigation Menu Start */}
         <div className="header__navigation">
           <nav id="menu" className="menu">
             <ul className="menu__list d-flex justify-content-start">
@@ -52,8 +50,6 @@ const Header = ({ setTheme }) => {
             </ul>
           </nav>
         </div>
-        {/* Navigation Menu End */}
-        {/* Header Controls Start */}
         <div className="header__controls d-flex justify-content-end">
           <button
             id="color-switcher"
@@ -75,9 +71,7 @@ const Header = ({ setTheme }) => {
             <i className="ph-bold ph-chat-dots" />
           </a>
         </div>
-        {/* Header Controls End */}
       </header>
-      {/* Header End */}
     </>
   );
 };
