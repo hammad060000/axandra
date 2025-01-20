@@ -59,7 +59,7 @@ function Users() {
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
-      }, 4000);
+      }, 6000);
     } catch (error) {
       console.error("Error adding document: ", error);
       setLoader(false);
