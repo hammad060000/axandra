@@ -1,13 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { db } from "./firebaseConfig";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, deleteDoc, doc } from "firebase/firestore";
 import TopButtons from "./component/TopButtons";
 
 const Messages = () => {
   const [users, setUsers] = useState([]);
 
-  // Function to get real-time users
   const getUsersRealtime = () => {
     const usersRef = collection(db, "messages");
     onSnapshot(usersRef, (snapshot) => {
@@ -16,9 +15,20 @@ const Messages = () => {
     });
   };
 
+  const deleteUser = async (id) => {
+    try {
+      const userDocRef = doc(db, "messages", id);
+      await deleteDoc(userDocRef);
+      console.log(`User with ID ${id} deleted.`);
+    } catch (error) {
+      console.error("Error deleting user: ", error);
+    }
+  };
+
   useEffect(() => {
     getUsersRealtime();
   }, []);
+
   return (
     <div className="dashboard-container">
       <TopButtons />
@@ -33,6 +43,7 @@ const Messages = () => {
               <th>Email</th>
               <th>Username</th>
               <th>Description</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -43,11 +54,19 @@ const Messages = () => {
                   <td>{user?.email}</td>
                   <td>{user?.username}</td>
                   <td>{user?.description}</td>
+                  <td>
+                    <button
+                      onClick={() => deleteUser(user?.id)}
+                      className="btn btn-danger"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="4" className="no-projects">
+                <td colSpan="5" className="no-projects">
                   No Messages available.
                 </td>
               </tr>
